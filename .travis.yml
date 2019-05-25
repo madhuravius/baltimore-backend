@@ -4,6 +4,10 @@ python: "3.7"
 sudo: false
 install:
   - pip install -r requirements.txt
+before_script:
+  - psql -c "CREATE DATABASE codeforbaltimore;" -U postgres
 script:
   - make lint
   - make test
+services:
+  - postgresql
