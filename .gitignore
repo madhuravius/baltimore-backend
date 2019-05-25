@@ -1,0 +1,13 @@
+# Local environment setup and environment files
+.env
+env
+
+# Raw download sets
+raw/*
+
+# Python artifacts
+__pycache__
+.pytest_cache
+
+# filesystem
+.DS_Store
