@@ -8,7 +8,9 @@ addons:
     - gdal-bin
     - libgdal-dev
 install:
-  - pip install -r requirements.txt
+  - export CPLUS_INCLUDE_PATH=/usr/include/gdal
+  - export C_INCLUDE_PATH=/usr/include/gdal
+  - pip install --no-use-wheel -r requirements.txt
 before_script:
   - psql -c "CREATE DATABASE codeforbaltimore;" -U postgres
 script:
