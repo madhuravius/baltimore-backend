@@ -10,7 +10,7 @@ addons:
 install:
   - export CPLUS_INCLUDE_PATH=/usr/include/gdal
   - export C_INCLUDE_PATH=/usr/include/gdal
-  - pip install --no-use-wheel -r requirements.txt
+  - pip3 install --no-binary -r requirements.txt
 before_script:
   - psql -c "CREATE DATABASE codeforbaltimore;" -U postgres
 script:
