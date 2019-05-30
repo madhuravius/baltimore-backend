@@ -7,7 +7,6 @@ addons:
     packages:
     - gdal-bin
     - libgdal-dev
-    - libgdal1h
 install:
   - pip install -r requirements.txt
 before_script:
