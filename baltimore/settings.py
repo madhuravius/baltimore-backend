@@ -45,8 +45,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
     'rest_framework',
-    'publicsafety'
+    'django_extensions',
+    'publicsafety',
 ]
 
 
@@ -95,10 +97,15 @@ if DATABASE_URL == '':
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE':  'django.contrib.gis.db.backends.postgis',
+    },
+    'TEST': {
+        'ENGINE': 'django.contrib.gis.db.backends.spatialite',
+        'NAME': '_testdb'
     }
 }
 DATABASES['default'] = dj_database_url.parse(DATABASE_URL, conn_max_age=600)
+DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

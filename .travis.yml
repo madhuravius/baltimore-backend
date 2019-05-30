@@ -8,6 +8,6 @@ before_script:
   - psql -c "CREATE DATABASE codeforbaltimore;" -U postgres
 script:
   - make lint
-  - make test
+  - make coverage
 services:
   - postgresql

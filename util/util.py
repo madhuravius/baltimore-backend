@@ -29,3 +29,17 @@ def download_all_raw_data():
                                    reporthook=dl_progress)
         timer_end = time.time()
         print("Time to complete download: ", timer_end-timer_start, " seconds")
+
+
+def download_file(url, filepath):
+    """
+    Utility function to download url and save to path
+    """
+    timer_start = time.time()
+    print("Downloading file: ", url)
+    urllib.request.urlretrieve(url,
+                               constants.DOWNLOAD_PATH +
+                               filepath,
+                               reporthook=dl_progress)
+    timer_end = time.time()
+    print("Time to complete download: ", timer_end-timer_start, " seconds")

@@ -2,7 +2,13 @@
 """
 Constants for util
 """
-from publicsafety import models
+import os
+from django.core.wsgi import get_wsgi_application
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'baltimore.settings')
+APPLICATION = get_wsgi_application()
+
+from publicsafety import models #pylint: disable=wrong-import-position
 
 DOWNLOAD_PATH = './raw/'
 
@@ -140,3 +146,7 @@ FILE_PARENT_MAPPING = [
         'mapping': MAPPING_USE_OF_FORCE,
     }
 ]
+
+BALTIMORE_SHAPEFILE_URL = 'https://data.baltimorecity.gov/api/geospatial/27b4-qbwn' + \
+    '?method=export&format=Shapefile'
+BALTIMORE_SHAPEFILE_LOCATION = "baltimore.zip"

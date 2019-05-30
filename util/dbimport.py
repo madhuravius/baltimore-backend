@@ -3,13 +3,6 @@
 Utility files to facilitate/automate database imports
 """
 import csv
-import os
-
-from django.core.wsgi import get_wsgi_application
-
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'baltimore.settings')
-APPLICATION = get_wsgi_application()
 
 
 def import_data_to_db(filename, model):  # , mapping, model):x
@@ -24,4 +17,4 @@ def import_data_to_db(filename, model):  # , mapping, model):x
         for line in reader:
             count += 1
             if count > 1:  # skip first line (field labels/names)
-                model.insert_from_csv(line)
+                model.insert_from_csv(None, line)

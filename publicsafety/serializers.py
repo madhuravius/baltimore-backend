@@ -3,7 +3,7 @@
 Serializers for publicsafety app
 """
 from rest_framework import serializers
-from .models import EmergencyPoliceCalls
+from .models import EmergencyPoliceCalls, Arrests
 
 
 class EmergencyPoliceCallsSerializer(serializers.HyperlinkedModelSerializer):
@@ -31,6 +31,40 @@ class EmergencyPoliceCallsSerializer(serializers.HyperlinkedModelSerializer):
                   'community_statistical_areas',
                   'census_tracts',
                   'vri_zones',
+                  'location',
+                  'gps_coordinates',
+                  'census_neighborhoods_2010',
+                  'census_wards_precincts',
+                  'zip_codes')
+
+
+class ArrestsSerializer(serializers.HyperlinkedModelSerializer):
+    """
+    Serializer for Arrests
+    """
+    class Meta:
+        """
+        Meta for Arrests
+        """
+        model = Arrests
+        fields = ('arrest_id',
+                  'age',
+                  'sex',
+                  'race',
+                  'arrest_date_time',
+                  'arrest_date',
+                  'arrest_time',
+                  'arrest_location',
+                  'incident_offense',
+                  'incident_location',
+                  'charge',
+                  'charge_description',
+                  'district',
+                  'post',
+                  'neighborhood',
+                  'longitude',
+                  'latitude',
+                  'gps_coordinates',
                   'location',
                   'census_neighborhoods_2010',
                   'census_wards_precincts',
