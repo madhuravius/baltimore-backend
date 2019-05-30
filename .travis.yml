@@ -6,12 +6,8 @@ addons:
   apt:
     packages:
     - gdal-bin
-    - libproj-dev
-    - libhdf5-serial-dev
     - libgdal-dev
-    - libatlas-dev
-    - libatlas-base-dev
-    - gfortran
+    - libgdal1h
 install:
   - pip install -r requirements.txt
 before_script:
