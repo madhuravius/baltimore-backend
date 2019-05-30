@@ -22,4 +22,3 @@ class ArrestsViewSet(viewsets.ModelViewSet):
     """
     queryset = Arrests.objects.all()
     serializer_class = ArrestsSerializer
-

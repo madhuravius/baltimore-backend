@@ -34,7 +34,7 @@ if SECRET_KEY == '':
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = "*"
 
 
 # Application definition
@@ -95,17 +95,15 @@ if DATABASE_URL == '':
     print("INVALID CONFIGURATION - Missing DATABASE_URL")
     sys.exit(2)
 
-DATABASES = {
-    'default': {
-        'ENGINE':  'django.contrib.gis.db.backends.postgis',
-    },
-    'TEST': {
+DATABASES = {}
+if os.environ.get('ENVIRON', '') == 'LOCAL':
+    DATABASES['default'] = dj_database_url.parse(DATABASE_URL, conn_max_age=600)
+    DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
+else:
+    DATABASES['default'] = {
         'ENGINE': 'django.contrib.gis.db.backends.spatialite',
         'NAME': '_testdb'
     }
-}
-DATABASES['default'] = dj_database_url.parse(DATABASE_URL, conn_max_age=600)
-DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -153,8 +151,8 @@ LOGGING = {
     'formatters': {
         'colored_verbose': {
             '()': 'colorlog.ColoredFormatter',
-            'format': "%(log_color)s%(levelname)s %(reset)s%(asctime)s %(red)s%(module)s\
-                - %(lineno)d %(reset)s%(white)s%(message)s"
+            'format': '%(log_color)s%(levelname)s %(reset)s%(asctime)s %(red)s%(module)s' +
+                      ' - %(lineno)d %(reset)s%(white)s%(message)s'
         },
     },
     'handlers': {

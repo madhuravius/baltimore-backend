@@ -1,20 +1,10 @@
-language: python
+language: generic
 dist: xenial
-python: "3.7"
-sudo: true
-addons:
-  apt:
-    packages:
-    - gdal-bin
-    - libgdal-dev
-install:
-  - export CPLUS_INCLUDE_PATH=/usr/include/gdal
-  - export C_INCLUDE_PATH=/usr/include/gdal
-  - pip3 install -r requirements.txt --no-binary all
-before_script:
-  - psql -c "CREATE DATABASE codeforbaltimore;" -U postgres
+sudo: false
+before_install:
+  - make docker-build
 script:
-  - make lint
-  - make coverage
+  - make docker-lint
+  - make docker-coverage
 services:
-  - postgresql
+  - docker

@@ -45,3 +45,6 @@ ipython_config.py
 
 # filesystem
 .DS_Store
+
+local.sh
+_testdb
