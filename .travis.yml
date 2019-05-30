@@ -11,3 +11,5 @@ script:
   - make coverage
 services:
   - postgresql
+virtualenv:
+  system_site_packages: true
