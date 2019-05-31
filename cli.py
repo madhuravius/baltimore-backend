@@ -2,8 +2,9 @@
 """
 Command line utility
 """
-import click
 import zipfile
+
+import click
 
 from util import constants
 from util import dbimport
@@ -30,12 +31,19 @@ def download():
 def database():
     """
     -- 🤖 Import all raw files to database
+        * - All (USE WITH CAUTION)
+        Public Safety
+        1. 911 Police Calls For Service
+        2. BPD Arrests
+        3. BPD Victim Based Crime Data
+        4. Gun Offenders
+        5. Police Use of Force and In-Custody Injuries
     """
     click.echo("🤖  - Importing raw files to database")
     filename = constants.DOWNLOAD_PATH + \
-        constants.FILE_PARENT_MAPPING[0]['file_name']
+        constants.FILE_PARENT_MAPPING[2]['file_name']
     dbimport.import_data_to_db(
-        filename, constants.FILE_PARENT_MAPPING[0]['model'])
+        filename, constants.FILE_PARENT_MAPPING[2]['model'])
 
 @main.command()
 def shapefiles():

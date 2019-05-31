@@ -126,12 +126,14 @@ FILE_PARENT_MAPPING = [
         'file_name': 'BPD_Arrests.csv',
         'url': 'https://data.baltimorecity.gov/api/views/3i3v-ibrt/rows.csv?accessType=DOWNLOAD',
         'mapping': MAPPING_BPD_ARRESTS,
+        'model': models.Arrests,
     },  # below might need
     {
         'readable_name': 'BPD Victim Based Crime Data',
         'file_name': 'BPD_Part_1_Victim_Based_Crime_Data.csv',
         'url': 'https://data.baltimorecity.gov/api/views/wsfq-mvij/rows.csv?accessType=DOWNLOAD',
         'mapping': MAPPING_BPD_ARRESTS,
+        'model': models.VictimBasedCrime,
     },
     {
         'readable_name': 'Gun Offenders',

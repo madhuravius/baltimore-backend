@@ -15,9 +15,13 @@ import sys
 import os
 
 import dj_database_url
-from dotenv import load_dotenv
-load_dotenv()
 
+from dotenv import load_dotenv
+
+if os.environ.get('ENVIRON', '') == 'LOCAL':
+    load_dotenv('.env')
+else:
+    load_dotenv('test.env')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -97,7 +101,8 @@ if DATABASE_URL == '':
 
 DATABASES = {}
 if os.environ.get('ENVIRON', '') == 'LOCAL':
-    DATABASES['default'] = dj_database_url.parse(DATABASE_URL, conn_max_age=600)
+    DATABASES['default'] = dj_database_url.parse(
+        DATABASE_URL, conn_max_age=600)
     DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 else:
     DATABASES['default'] = {
@@ -174,3 +179,10 @@ LOGGING = {
         },
     }
 }
+
+NOTEBOOK_ARGUMENTS = [
+    '--ip=0.0.0.0',
+    '--port=8888',
+    '--no-browser',
+    '--allow-root'
+]

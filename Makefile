@@ -33,8 +33,8 @@ docker-local:
 		-e POSTGRES_URL="${LOCAL_POSTGRES_URL}" \
 		-e SECRET_KEY="${LOCAL_SECRET_KEY}" \
 		-e ENVIRON="LOCAL" \
-		-p 80:80 \
-		madhuravius/baltimore-backend python3 manage.py runserver
+		-p 8000:8000 \
+		madhuravius/baltimore-backend python3 manage.py runserver 0.0.0.0:8000
 docker-local-bash:
 	docker run \
 		-e POSTGRES_URL="${LOCAL_POSTGRES_URL}" \
@@ -49,7 +49,7 @@ docker-notebook:
 		-e SECRET_KEY="${LOCAL_SECRET_KEY}" \
 		-e ENVIRON="LOCAL" \
 		-p 8888:8888 \
-		madhuravius/baltimore-backend python3 manage.py python3 manage.py shell_plus --notebook
+		madhuravius/baltimore-backend python3 manage.py shell_plus --notebook
 docker-make-migrations-local:
 	docker run \
 		-e POSTGRES_URL="${LOCAL_POSTGRES_URL}" \
