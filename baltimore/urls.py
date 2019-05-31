@@ -11,6 +11,8 @@ ROUTER.register(r'api/v1/publicsafety/emergencypolicecalls',
                 views.EmergencyPoliceCallsViewSet)
 ROUTER.register(r'api/v1/publicsafety/arrests',
                 views.ArrestsViewSet)
+ROUTER.register(r'api/v1/publicsafety/victimbasedcrime',
+                views.VictimBasedCrimeViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

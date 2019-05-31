@@ -27,7 +27,7 @@ class ViewTests(SimpleTestCase):
         self.assertEqual(response.status_code, 200)
 
 
-    def test_public_safety_emergency_police_calls(self):
+    def test_public_safety_emergencypolicecalls(self):
         """
         Test api - emergencypolicecalls
         """
@@ -40,4 +40,12 @@ class ViewTests(SimpleTestCase):
         Test api - arrests
         """
         response = self.client.get('/api/v1/publicsafety/arrests/')
+        self.assertEqual(response.status_code, 200)
+
+
+    def test_public_safety_emergency_victimbasedcrime(self):
+        """
+        Test api - victimbasedcrime
+        """
+        response = self.client.get('/api/v1/publicsafety/victimbasedcrime/')
         self.assertEqual(response.status_code, 200)
