@@ -6,7 +6,9 @@ Public safety views
 from rest_framework import viewsets
 
 from .models import Arrests, EmergencyPoliceCalls, VictimBasedCrime
-from .serializers import EmergencyPoliceCallsSerializer, ArrestsSerializer, VictimBasedCrimeSerializer
+from .serializers import EmergencyPoliceCallsSerializer, \
+    ArrestsSerializer, \
+    VictimBasedCrimeSerializer
 
 
 class EmergencyPoliceCallsViewSet(viewsets.ModelViewSet):
@@ -16,12 +18,14 @@ class EmergencyPoliceCallsViewSet(viewsets.ModelViewSet):
     queryset = EmergencyPoliceCalls.objects.all()
     serializer_class = EmergencyPoliceCallsSerializer
 
+
 class ArrestsViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows arrests to be viewed or edited.
     """
     queryset = Arrests.objects.all()
     serializer_class = ArrestsSerializer
+
 
 class VictimBasedCrimeViewSet(viewsets.ModelViewSet):
     """
