@@ -3,6 +3,7 @@
 Serializers for publicsafety app
 """
 from rest_framework import serializers
+from rest_framework_gis.serializers import GeoFeatureModelSerializer
 from .models import Arrests, EmergencyPoliceCalls, VictimBasedCrime
 
 
@@ -38,7 +39,7 @@ class EmergencyPoliceCallsSerializer(serializers.HyperlinkedModelSerializer):
                   'zip_codes')
 
 
-class ArrestsSerializer(serializers.HyperlinkedModelSerializer):
+class ArrestsSerializer(GeoFeatureModelSerializer):
     """
     Serializer for Arrests
     """
@@ -47,6 +48,7 @@ class ArrestsSerializer(serializers.HyperlinkedModelSerializer):
         Meta for Arrests
         """
         model = Arrests
+        geo_field = "gps_coordinates"
         fields = ('arrest_id',
                   'age',
                   'sex',

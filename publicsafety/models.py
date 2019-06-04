@@ -139,7 +139,7 @@ class Arrests(models.Model):
         date_time_to_insert = datetime.strptime(
             line[4] + ' ' + line[5], '%m/%d/%Y %H:%M')
         try:
-            lat, longit = float(line[15]), float(line[14])
+            lat, longit = float(line[14]), float(line[15])
             age = int(line[1])
         except ValueError:
             lat, longit = float(0), float(0)

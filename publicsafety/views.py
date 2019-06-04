@@ -18,7 +18,6 @@ class EmergencyPoliceCallsViewSet(viewsets.ModelViewSet):
     queryset = EmergencyPoliceCalls.objects.all()
     serializer_class = EmergencyPoliceCallsSerializer
 
-
 class ArrestsViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows arrests to be viewed or edited.

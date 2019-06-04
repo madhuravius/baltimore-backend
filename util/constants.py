@@ -3,114 +3,141 @@
 Constants for util
 """
 import os
-from django.core.wsgi import get_wsgi_application
+from django.core.wsgi import get_wsgi_application # pylint: disable=wrong-import-position
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'baltimore.settings')
 APPLICATION = get_wsgi_application()
 
-from publicsafety import models #pylint: disable=wrong-import-position
+from publicsafety import models  # pylint: disable=wrong-import-position
 
 DOWNLOAD_PATH = './raw/'
 
 # Starting section of field column names on csvs
 MAPPING_911_POLICE_CALLS = {
-    'fields': ['RecordID',
-               'CallNumber',
-               'CallDateTime',
-               'Priority',
-               'District',
-               'Description',
-               'IncidentLocation',
-               'ZipCode',
-               'Neighborhood',
-               'PoliceDistrict',
-               'PolicePost',
-               'CouncilDistrict',
-               'SheriffDistricts',
-               'Community_Statistical_Areas',
-               'Census_Tracts',
-               'VRIZones',
-               'Location',
-               '2010 Census Neighborhoods',
-               '2010 Census Wards Precincts',
-               'Zip Codes']
+    'fields': [
+        'RecordID',
+        'CallNumber',
+        'CallDateTime',
+        'Priority',
+        'District',
+        'Description',
+        'IncidentLocation',
+        'ZipCode',
+        'Neighborhood',
+        'PoliceDistrict',
+        'PolicePost',
+        'CouncilDistrict',
+        'SheriffDistricts',
+        'Community_Statistical_Areas',
+        'Census_Tracts',
+        'VRIZones',
+        'Location',
+        '2010 Census Neighborhoods',
+        '2010 Census Wards Precincts',
+        'Zip Codes'
+    ]
 }
 
 MAPPING_BPD_ARRESTS = {
-    'fields': ['Arrest',
-               'Age',
-               'Sex',
-               'Race',
-               'ArrestDate',
-               'ArrestTime',
-               'ArrestLocation',
-               'IncidentOffense',
-               'IncidentLocation',
-               'Charge',
-               'ChargeDescription',
-               'District',
-               'Post',
-               'Neighborhood',
-               'Longitude',
-               'Latitude',
-               'Location 1',
-               '2010 Census Neighborhoods',
-               '2010 Census Wards Precincts',
-               'Zip Codes']
+    'fields': [
+        'Arrest',
+        'Age',
+        'Sex',
+        'Race',
+        'ArrestDate',
+        'ArrestTime',
+        'ArrestLocation',
+        'IncidentOffense',
+        'IncidentLocation',
+        'Charge',
+        'ChargeDescription',
+        'District',
+        'Post',
+        'Neighborhood',
+        'Longitude',
+        'Latitude',
+        'Location 1',
+        '2010 Census Neighborhoods',
+        '2010 Census Wards Precincts',
+        'Zip Codes'
+    ]
 }
 
 
 MAPPING_BPD_VICTIM_BASED_CRIMES = {
-    'fields': ['CrimeDate',
-               'CrimeTime',
-               'CrimeCode',
-               'Location',
-               'Description',
-               'Inside/Outside',
-               'Weapon',
-               'Post',
-               'District',
-               'Neighborhood',
-               'Longitude',
-               'Latitude',
-               'Location 1',
-               'Premise',
-               'vri_name1',
-               'Total Incidents']
+    'fields': [
+        'CrimeDate',
+        'CrimeTime',
+        'CrimeCode',
+        'Location',
+        'Description',
+        'Inside/Outside',
+        'Weapon',
+        'Post',
+        'District',
+        'Neighborhood',
+        'Longitude',
+        'Latitude',
+        'Location 1',
+        'Premise',
+        'vri_name1',
+        'Total Incidents'
+    ]
 }
 
 MAPPING_GUN_OFFENDERS = {
-    'fields': ['caseNumber',
-               'created_date',
-               'modified_date',
-               'lastName',
-               'firstName',
-               'middleName',
-               'Date_Of_Birth',
-               'sex',
-               'race',
-               'full_address',
-               'city',
-               'state',
-               'zip_code',
-               'district',
-               'post',
-               'neighborhood',
-               'Longitude',
-               'Latitude',
-               'Location 1']
+    'fields': [
+        'caseNumber',
+        'created_date',
+        'modified_date',
+        'lastName',
+        'firstName',
+        'middleName',
+        'Date_Of_Birth',
+        'sex',
+        'race',
+        'full_address',
+        'city',
+        'state',
+        'zip_code',
+        'district',
+        'post',
+        'neighborhood',
+        'Longitude',
+        'Latitude',
+        'Location 1'
+    ],
 }
 
 MAPPING_USE_OF_FORCE = {
-    'fields': ['DATE',
-               'CC#',
-               'DISTRICT',
-               'LOCATION',
-               'TYPE',
-               'X (LONG)',
-               'Y (LAT)',
-               'COORDINATES',
-               'Zip Codes']
+    'fields': [
+        'DATE',
+        'CC#',
+        'DISTRICT',
+        'LOCATION',
+        'TYPE',
+        'X (LONG)',
+        'Y (LAT)',
+        'COORDINATES',
+        'Zip Codes'
+    ]
+}
+
+MAPPING_HOMICIDE_DATA_WAPO = {
+    'fields': [
+        'uid',
+        'reported_date',
+        'victim_last',
+        'victim_first',
+        'victim_race',
+        'victim_age',
+        'victim_sex',
+        'city',
+        'state',
+        'lat',
+        'lon',
+        'disposition'
+    ],
 }
 
 FILE_PARENT_MAPPING = [
@@ -146,6 +173,12 @@ FILE_PARENT_MAPPING = [
         'file_name': 'Police_use_of_force_and_in-custody_injuries.csv',
         'url': 'https://data.baltimorecity.gov/api/views/5kep-c625/rows.csv?accessType=DOWNLOAD',
         'mapping': MAPPING_USE_OF_FORCE,
+    },
+    {
+        'readable_name': 'Homicide Clearance (National) - WaPo',
+        'file_name': 'homicide-data-wapo.csv',
+        'url': 'https://raw.githubusercontent.com/washingtonpost/data-homicides/master/homicide-data.csv',  # pylint: disable=line-too-long,
+        'mapping': MAPPING_HOMICIDE_DATA_WAPO,
     }
 ]
 
