@@ -59,7 +59,7 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 500
+    'PAGE_SIZE': 100
 }
 
 MIDDLEWARE = [
@@ -187,3 +187,11 @@ NOTEBOOK_ARGUMENTS = [
     '--no-browser',
     '--allow-root'
 ]
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    }
+}
+CACHE_COUNT_TIMEOUT = 3600  # seconds, not too long.
+CACHE_EMPTY_QUERYSETS = True

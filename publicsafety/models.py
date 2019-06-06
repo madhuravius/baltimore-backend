@@ -2,13 +2,13 @@
 Models for publicsafety app
 """
 # -*- coding: utf-8 -*-
-
 from datetime import datetime
 import re
 import hashlib
 import logging
 import uuid
 
+from caching.base import CachingManager, CachingMixin
 from django.db import models
 from django.db.utils import IntegrityError
 from django.contrib.gis.db import models as geo_models
@@ -17,7 +17,7 @@ from django.contrib.gis.geos import Point
 LOGGER = logging.getLogger()
 
 
-class EmergencyPoliceCalls(models.Model):
+class EmergencyPoliceCalls(CachingMixin, models.Model):
     """
     Maps to this file dump: 911_Police_Calls_for_Service.csv (see FILE_PARENT_MAPPING)
     Sample result
@@ -49,8 +49,10 @@ class EmergencyPoliceCalls(models.Model):
     census_wards_precincts = models.TextField()  # 2010 Census Wards Precincts
     zip_codes = models.TextField()  # Zip Codes
 
+    objects = CachingManager()
     class Meta:
         ordering = ['-record_id']
+        base_manager_name = 'objects'
 
     def insert_from_csv(self, line):
         """
@@ -66,7 +68,7 @@ class EmergencyPoliceCalls(models.Model):
                 '(', '').replace(')', '').split(',')
             gps_coordinates = [float(elem) for elem in gps_coordinates]
         else:
-            gps_coordinates = [None, None]
+            gps_coordinates = [float(0), float(0)]
 
         entry = EmergencyPoliceCalls(
             record_id=line[0],
@@ -98,7 +100,7 @@ class EmergencyPoliceCalls(models.Model):
         return self.record_id
 
 
-class Arrests(models.Model):
+class Arrests(CachingMixin, models.Model):
     '''
     Generated from following dump:
     Arrest,Age,Sex,Race,ArrestDate,ArrestTime,ArrestLocation,IncidentOffense,IncidentLocation,Charge,ChargeDescription,District,Post,Neighborhood,Longitude,Latitude,Location 1,2010 Census Neighborhoods,2010 Census Wards Precincts,Zip Codes #pylint: disable=line-too-long
@@ -131,6 +133,8 @@ class Arrests(models.Model):
     census_neighborhoods_2010 = models.TextField()  # 2010 Census Neighborhoods
     census_wards_precincts = models.TextField()  # 2010 Census Wards Precincts
     zip_codes = models.TextField()  # Zip Codes
+
+    objects = CachingManager()
 
     def insert_from_csv(self, line):
         """
@@ -172,12 +176,13 @@ class Arrests(models.Model):
 
     class Meta:
         ordering = ['-arrest_id']
+        base_manager_name = 'objects'
 
     def __str__(self):
         return self.arrest_id
 
 
-class VictimBasedCrime(models.Model):
+class VictimBasedCrime(CachingMixin, models.Model):
     '''
     Generated from dump:
     CrimeDate,CrimeTime,CrimeCode,Location,Description,Inside/Outside,Weapon,Post,District,Neighborhood,Longitude,Latitude,Location 1,Premise,vri_name1,Total Incidents #pylint: disable=line-too-long
@@ -204,6 +209,8 @@ class VictimBasedCrime(models.Model):
     premise = models.CharField(max_length=100)  # Premise
     vri_name = models.CharField(max_length=100)  # vri_name1
     total_incidents = models.IntegerField()  # Total
+
+    objects = CachingManager()
 
     def insert_from_csv(self, line):
         """
@@ -255,6 +262,7 @@ class VictimBasedCrime(models.Model):
 
     class Meta:
         ordering = ['-id']
+        base_manager_name = 'objects'
 
     def __str__(self):
         return self.id

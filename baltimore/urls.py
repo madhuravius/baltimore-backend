@@ -10,7 +10,8 @@ ROUTER = routers.DefaultRouter()
 ROUTER.register(r'api/v1/publicsafety/emergencypolicecalls',
                 views.EmergencyPoliceCallsViewSet)
 ROUTER.register(r'api/v1/publicsafety/arrests',
-                views.ArrestsViewSet)
+                views.ArrestsViewSet,
+                base_name='arrests')
 ROUTER.register(r'api/v1/publicsafety/victimbasedcrime',
                 views.VictimBasedCrimeViewSet)
 

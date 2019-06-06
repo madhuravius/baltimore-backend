@@ -16,6 +16,7 @@ class EmergencyPoliceCallsSerializer(serializers.HyperlinkedModelSerializer):
         Meta for EmergencyPoliceCalls
         """
         model = EmergencyPoliceCalls
+        geo_field = "gps_coordinates"
         fields = ('record_id',
                   'call_number',
                   'call_date_time',
